@@ -1,0 +1,75 @@
+{
+    "programLineup": {
+      "Sunday": [
+        ["Nidi Nethi Y Weekend", "12:00 AM - 05:59 AM"],
+        ["Y FM Cover Sunday", "06:00 AM - 08:59 AM"],
+        ["Y FM Cover Sunday", "09:00 AM - 11:59 AM"],
+        ["Y FM Cover Sunday", "12:00 PM - 01:59 PM"],
+        ["Y FM Cover Sunday", "02:00 PM - 04:59 PM"],
+        ["Y FM Cover Sunday", "05:00 PM - 06:59 PM"],
+        ["Y FM Cover Sunday", "07:00 PM - 09:59 PM"],
+        ["Y FM Cover Sunday", "10:00 PM - 11:59 PM"]
+      ],
+      "Monday": [
+        ["Nidi Nethi Y", "12:00 AM - 04:59 AM"],
+        ["U and Y", "05:00 AM - 06:59 AM"],
+        ["Morning Vibes", "07:00 AM - 09:59 AM"],
+        ["Sindhu Circle", "10:00 AM - 12:59 PM"],
+        ["Y Cafe", "01:00 PM - 03:59 PM"],
+        ["Y Hendewa", "04:00 PM - 06:59 PM"],
+        ["Love Dreams", "07:00 PM - 09:59 PM"],
+        ["Night Style", "10:00 PM - 11:59 PM"]
+      ],
+      "Tuesday": [
+        ["Nidi Nethi Y", "12:00 AM - 04:59 AM"],
+        ["U and Y", "05:00 AM - 06:59 AM"],
+        ["Morning Vibes", "07:00 AM - 09:59 AM"],
+        ["Sindhu Circle", "10:00 AM - 12:59 PM"],
+        ["Y Cafe", "01:00 PM - 03:59 PM"],
+        ["Y Hendewa", "04:00 PM - 06:59 PM"],
+        ["Love Dreams", "07:00 PM - 09:59 PM"],
+        ["Night Style", "10:00 PM - 11:59 PM"]
+      ],
+      "Wednesday": [
+        ["Nidi Nethi Y", "12:00 AM - 04:59 AM"],
+        ["U and Y", "05:00 AM - 06:59 AM"],
+        ["Morning Vibes", "07:00 AM - 09:59 AM"],
+        ["Sindhu Circle", "10:00 AM - 12:59 PM"],
+        ["Y Cafe", "01:00 PM - 03:59 PM"],
+        ["Y Hendewa", "04:00 PM - 06:59 PM"],
+        ["Love Dreams", "07:00 PM - 09:59 PM"],
+        ["Night Style", "10:00 PM - 11:59 PM"]
+      ],
+      "Thursday": [
+        ["Nidi Nethi Y", "12:00 AM - 04:59 AM"],
+        ["U and Y", "05:00 AM - 06:59 AM"],
+        ["Morning Vibes", "07:00 AM - 09:59 AM"],
+        ["Sindhu Circle", "10:00 AM - 12:59 PM"],
+        ["Y Cafe", "01:00 PM - 03:59 PM"],
+        ["Y Hendewa", "04:00 PM - 06:59 PM"],
+        ["Love Dreams", "07:00 PM - 09:59 PM"],
+        ["Night Style", "10:00 PM - 11:59 PM"]
+      ],
+      "Friday": [
+        ["Nidi Nethi Y", "12:00 AM - 04:59 AM"],
+        ["U and Y", "05:00 AM - 06:59 AM"],
+        ["Morning Vibes", "07:00 AM - 09:59 AM"],
+        ["Sindhu Circle", "10:00 AM - 12:59 PM"],
+        ["Y Cafe", "01:00 PM - 03:59 PM"],
+        ["Y Hendewa", "04:00 PM - 06:59 PM"],
+        ["Love Dreams", "07:00 PM - 09:59 PM"],
+        ["Back to Back", "08:00 PM - 07:59 PM"],
+        ["Y DJ Night", "08:00 PM - 11:59 PM"]
+      ],
+      "Saturday": [
+        ["Nidi Nethi Y Weekend", "12:00 AM - 05:59 AM"],
+        ["Y Weekend", "06:00 AM - 08:59 AM"],
+        ["Y Weekend", "09:00 AM - 11:59 AM"],
+        ["Y Weekend", "12:00 PM - 01:59 PM"],
+        ["Hit 20", "02:00 PM - 03:59 PM"],
+        ["Y Weekend", "04:00 PM - 07:59 PM"],
+        ["Y Weekend", "08:00 PM - 11:59 PM"]
+      ]
+    }
+  }
+  

@@ -1,14 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FaPlay, FaPause, FaForward, FaBackward } from "react-icons/fa";
+import { FaPlay, FaPause, FaSun, FaMoon } from "react-icons/fa"; // Sun and Moon icons for theme toggle
 import { motion } from "framer-motion";
 import ReactAudioPlayer from "react-audio-player";
 import radioImage from "../assets/ylogo.png"; // Adjust the path based on your project structure
 import programData from "../data/program.json"; // Adjust the path to your JSON file
 
 const Home = () => {
-  const [isPlaying, setIsPlaying] = useState(false); // Initially set to false
+  const [isPlaying, setIsPlaying] = useState(false);
   const [currentProgram, setCurrentProgram] = useState("");
-  const audioRef = useRef(null); // Reference for controlling the audio player
+  const [isDarkMode, setIsDarkMode] = useState(true); // Dark mode by default
+  const audioRef = useRef(null);
 
   useEffect(() => {
     const updateCurrentProgram = () => {
@@ -16,38 +17,65 @@ const Home = () => {
       const dayOfWeek = now.toLocaleString("en-US", { weekday: "long" });
       const hours = now.getHours();
       const minutes = now.getMinutes();
-      const currentTime = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`; // Format time as HH:mm
+      const currentTime = `${hours < 10 ? "0" : ""}${hours}:${
+        minutes < 10 ? "0" : ""
+      }${minutes}`; // Format time as HH:mm
 
       const programs = programData.programLineup[dayOfWeek];
+      if (!programs) {
+        setCurrentProgram("No program scheduled for today.");
+        return;
+      }
+
       const currentProgram = programs.find(([programName, timeRange]) => {
-        const [startTime, endTime] = timeRange.split(" - ").map(t => convertTo24HourFormat(t));
+        const [startTimeStr, endTimeStr] = timeRange
+          .split(" - ")
+          .map((t) => t.trim());
+        const startTime = convertTo24HourFormat(startTimeStr);
+        const endTime = convertTo24HourFormat(endTimeStr);
         return timeIsInRange(currentTime, startTime, endTime);
       });
 
-      setCurrentProgram(currentProgram ? currentProgram[0] : "No program currently airing");
+      setCurrentProgram(
+        currentProgram ? currentProgram[0] : "No program currently airing"
+      );
     };
 
     const convertTo24HourFormat = (time) => {
       const [timePart, period] = time.split(" ");
       let [hour, minute] = timePart.split(":").map(Number);
+
       if (period === "PM" && hour < 12) {
         hour += 12; // Convert PM to 24-hour format
       }
       if (period === "AM" && hour === 12) {
         hour = 0; // Convert 12 AM to 0 hours
       }
-      return `${hour < 10 ? '0' : ''}${hour}:${minute < 10 ? '0' : ''}${minute}`; // Return HH:mm format
+      return `${
+        hour < 10 ? "0" : ""
+      }${hour}:${minute < 10 ? "0" : ""}${minute}`; // Return HH:mm format
+    };
+
+    const timeToMinutes = (time) => {
+      const [hour, minute] = time.split(":").map(Number);
+      return hour * 60 + minute;
     };
 
     const timeIsInRange = (time, start, end) => {
-      const currentTime = new Date(`1970-01-01T${time}`);
-      const startTime = new Date(`1970-01-01T${start}`);
-      const endTime = new Date(`1970-01-01T${end}`);
-      // Handle case where end time is past midnight
-      if (endTime < startTime) {
-        return currentTime >= startTime || currentTime <= endTime;
+      const currentMinutes = timeToMinutes(time);
+      const startMinutes = timeToMinutes(start);
+      const endMinutes = timeToMinutes(end);
+
+      if (endMinutes < startMinutes) {
+        // Time range crosses midnight
+        return (
+          currentMinutes >= startMinutes || currentMinutes <= endMinutes
+        );
+      } else {
+        return (
+          currentMinutes >= startMinutes && currentMinutes <= endMinutes
+        );
       }
-      return currentTime >= startTime && currentTime <= endTime;
     };
 
     updateCurrentProgram();
@@ -59,25 +87,41 @@ const Home = () => {
   const togglePlayPause = () => {
     if (audioRef.current.audioEl.current.paused) {
       audioRef.current.audioEl.current.play();
-      setIsPlaying(true); // Set to playing
+      setIsPlaying(true);
     } else {
       audioRef.current.audioEl.current.pause();
-      setIsPlaying(false); // Set to paused
+      setIsPlaying(false);
     }
+  };
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
   };
 
   // Waveform animation logic (with reduced heights)
   const bars = Array.from({ length: 20 }, (_, i) => i); // 20 bars
 
+  const shareUrl = "https://yfm.lk"; // Update with your share URL
+
   return (
     <motion.div
-      className="h-screen flex flex-col items-center justify-center text-white"
-      initial={{ background: "linear-gradient(to bottom, #ff0000, #000000, #0000ff)" }} // initial state with red and blue
+      className={`h-screen flex flex-col items-center justify-center ${
+        isDarkMode ? "bg-black text-white" : "bg-gray-100 text-black"
+      } transition-colors duration-500`}
+      initial={{
+        background: "linear-gradient(to bottom, #210105, #000000, #010721)",
+      }}
       animate={{
         background: [
-          "linear-gradient(to bottom, #210105, #000000, #010721)", // red to black to blue
-          "linear-gradient(to bottom, #000000, #210105, #010721)", // black to red and blue
-          "linear-gradient(to bottom, #010721, #000000, #210105)", // blue to black to red
+          isDarkMode
+            ? "linear-gradient(to bottom, #210105, #000000, #010721)"
+            : "linear-gradient(to bottom, #ffffff, #f7f8fa)",
+          isDarkMode
+            ? "linear-gradient(to bottom, #000000, #210105, #010721)"
+            : "linear-gradient(to bottom, #f7f8fa, #ffffff)",
+          isDarkMode
+            ? "linear-gradient(to bottom, #010721, #000000, #210105)"
+            : "linear-gradient(to bottom, #ffffff, #f7f8fa)",
         ],
       }}
       transition={{
@@ -86,12 +130,24 @@ const Home = () => {
         ease: "linear",
       }}
     >
+      {/* Theme Toggle */}
+      <button
+        onClick={toggleDarkMode}
+        className="absolute top-4 right-4 p-3 bg-gray-800 text-white rounded-full shadow-md hover:bg-gray-600 transition-colors"
+      >
+        {isDarkMode ? <FaSun className="text-xl" /> : <FaMoon className="text-xl" />}
+      </button>
+
       {/* Radio Image & Station Details */}
-      <div className="relative w-64 h-64 bg-black rounded-3xl shadow-lg mb-6">
+      <div
+        className={`relative w-56 h-56 rounded-3xl shadow-lg mb-6 overflow-hidden ${
+          isDarkMode ? "bg-gray-800" : "bg-white"
+        }`}
+      >
         <img
           src={radioImage}
           alt="Radio Station"
-          className="w-full h-full object-cover rounded-3xl"
+          className="w-full h-full object-cover"
         />
         <div className="absolute top-3 left-3 bg-red-600 text-white text-xs px-3 py-1 rounded-full shadow-md">
           LIVE
@@ -100,9 +156,16 @@ const Home = () => {
 
       {/* Radio Station Information */}
       <div className="text-center mb-6">
-        <h2 className="text-4xl font-semibold mb-2 text-red-500">Y FM Radio</h2>
-        <p className="text-gray-300">The Best Hits - 92.7 MHz</p>
-        <p className="text-lg font-bold text-yellow-400">{currentProgram}</p> {/* Display current program */}
+        <h2 className={`text-3xl font-semibold mb-2 ${isDarkMode ? "text-white" : "text-black"}`}>
+          Y FM Radio
+        </h2>
+        <p className={`text-gray-500 ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
+          The Best Hits - 92.7 MHz
+        </p>
+        <p className={`text-md font-bold ${isDarkMode ? "text-yellow-400" : "text-yellow-600"}`}>
+          {currentProgram}
+        </p>{" "}
+        {/* Display current program */}
       </div>
 
       {/* Waveform Visualization */}
@@ -110,9 +173,9 @@ const Home = () => {
         {bars.map((bar, index) => (
           <motion.div
             key={index}
-            className="w-1 bg-red-500"
+            className={`w-1 ${isDarkMode ? "bg-red-500" : "bg-gray-500"}`}
             animate={{
-              height: [5, Math.random() * 8 + 10, 5], // Reduced random heights
+              height: [5, Math.random() * 12 + 8, 5], // Reduced random heights
             }}
             transition={{
               duration: 1.5,
@@ -126,22 +189,18 @@ const Home = () => {
       </div>
 
       {/* Player Controls */}
-      <div className="flex justify-center items-center space-x-8 mb-8">
-        <button className="p-4 bg-gray-800 rounded-full shadow-lg hover:bg-gray-700">
-          <FaBackward className="text-2xl text-gray-400" />
-        </button>
+      <div className="flex justify-center items-center space-x-6 mb-8">
         <button
           onClick={togglePlayPause}
-          className="p-6 bg-red-500 rounded-full shadow-xl hover:bg-red-600"
+          className={`p-5 rounded-full shadow-md hover:scale-110 transition-all duration-300 ease-in-out ${
+            isDarkMode ? "bg-red-500" : "bg-blue-500"
+          }`}
         >
           {isPlaying ? (
-            <FaPause className="text-white text-3xl" />
+            <FaPause className="text-white text-2xl" />
           ) : (
-            <FaPlay className="text-white text-3xl" />
+            <FaPlay className="text-white text-2xl" />
           )}
-        </button>
-        <button className="p-4 bg-gray-800 rounded-full shadow-lg hover:bg-gray-700">
-          <FaForward className="text-2xl text-gray-400" />
         </button>
       </div>
 
@@ -149,7 +208,7 @@ const Home = () => {
       <ReactAudioPlayer
         src="https://mbc.thestreamtech.com:7032/"
         controls={false}
-        ref={audioRef} // Reference to the audio player
+        ref={audioRef}
       />
     </motion.div>
   );

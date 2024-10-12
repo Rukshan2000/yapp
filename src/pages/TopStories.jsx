@@ -1,7 +1,12 @@
 import React from 'react';
+import TopNavBar from '../components/TopNavBar';
+
 
 const TopStories = () => {
   return (
+    <>
+          <TopNavBar />
+          
     <div className="p-4 bg-black min-h-screen flex flex-col items-center justify-center">
       {/* Embed YouTube playlist 1 */}
       <iframe
@@ -43,6 +48,7 @@ const TopStories = () => {
       ></iframe>
 
     </div>
+    </>
   );
 };
 

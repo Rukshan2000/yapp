@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaPlay, FaPause, FaSun, FaMoon } from "react-icons/fa"; // Sun and Moon icons for theme toggle
 import { motion } from "framer-motion";
 import ReactAudioPlayer from "react-audio-player";
-import radioImage from "../assets/ylogo.png"; // Adjust the path based on your project structure
+import radioImage from "../assets/ylogo.jpg"; // Adjust the path based on your project structure
 import programData from "../data/program.json"; // Adjust the path to your JSON file
 
 const Home = () => {
@@ -94,10 +94,6 @@ const Home = () => {
     }
   };
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   // Waveform animation logic (with reduced heights)
   const bars = Array.from({ length: 20 }, (_, i) => i); // 20 bars
 
@@ -130,42 +126,34 @@ const Home = () => {
         ease: "linear",
       }}
     >
-      {/* Theme Toggle */}
-      <button
-        onClick={toggleDarkMode}
-        className="absolute top-4 right-4 p-3 bg-gray-800 text-white rounded-full shadow-md hover:bg-gray-600 transition-colors"
-      >
-        {isDarkMode ? <FaSun className="text-xl" /> : <FaMoon className="text-xl" />}
-      </button>
-
-      {/* Radio Image & Station Details */}
-      <div
-        className={`relative w-56 h-56 rounded-3xl shadow-lg mb-6 overflow-hidden ${
+      <motion.div
+        className={`relative w-56 h-56 rounded-full shadow-lg mb-6 overflow-hidden ${
           isDarkMode ? "bg-gray-800" : "bg-white"
         }`}
+        animate={{
+          rotate: [0, 360],
+        }}
+        transition={{
+          repeat: Infinity,
+          duration: 50, // Adjust the duration for slower or faster rotation
+          ease: "linear",
+        }}
       >
         <img
           src={radioImage}
           alt="Radio Station"
           className="w-full h-full object-cover"
         />
-        <div className="absolute top-3 left-3 bg-red-600 text-white text-xs px-3 py-1 rounded-full shadow-md">
-          LIVE
-        </div>
-      </div>
+      </motion.div>
 
       {/* Radio Station Information */}
       <div className="text-center mb-6">
-        <h2 className={`text-3xl font-semibold mb-2 ${isDarkMode ? "text-white" : "text-black"}`}>
-          Y FM Radio
-        </h2>
         <p className={`text-gray-500 ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
           The Best Hits - 92.7 MHz
         </p>
         <p className={`text-md font-bold ${isDarkMode ? "text-yellow-400" : "text-yellow-600"}`}>
           {currentProgram}
-        </p>{" "}
-        {/* Display current program */}
+        </p>
       </div>
 
       {/* Waveform Visualization */}

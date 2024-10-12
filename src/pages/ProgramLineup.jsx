@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import programData from '../data/program.json'; // Adjust the path as necessary
+import TopNavBar from '../components/TopNavBar'; // Import the TopNavBar
 
 const ProgramLineup = () => {
   const daysOfWeek = [
@@ -13,6 +14,7 @@ const ProgramLineup = () => {
 
   const [selectedDay, setSelectedDay] = useState(daysOfWeek[currentDayIndex]); // Default to current day
   const [currentProgram, setCurrentProgram] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false); // State for play/pause
 
   const handleDayChange = (event) => {
     setSelectedDay(event.target.value);
@@ -42,8 +44,18 @@ const ProgramLineup = () => {
 
   const programs = getProgramsForDay(selectedDay);
 
+  const togglePlayPause = () => {
+    setIsPlaying((prev) => !prev);
+  };
+
   return (
-    <div className="flex flex-col min-h-screen p-4 bg-black">
+    <div className="flex flex-col min-h-screen p-4 bg-black pt-16"> {/* Added padding-top to avoid overlap */}
+      <TopNavBar
+        currentProgram={currentProgram}
+        isPlaying={isPlaying}
+        togglePlayPause={togglePlayPause}
+      />
+      
       <motion.h2
         className="text-3xl font-bold mb-4 text-center text-white"
         initial={{ opacity: 0, y: -20 }}

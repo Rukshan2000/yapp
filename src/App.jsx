@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import BottomNavBar from './components/BottomNavBar';
+
 import Home from './pages/Home';
 import TopStories from './pages/TopStories';
 import ProgramLineup from './pages/ProgramLineup';

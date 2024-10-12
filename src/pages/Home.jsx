@@ -6,7 +6,7 @@ import radioImage from "../assets/ylogo.png"; // Adjust the path based on your p
 import programData from "../data/program.json"; // Adjust the path to your JSON file
 
 const Home = () => {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false); // Initially set to false
   const [currentProgram, setCurrentProgram] = useState("");
   const audioRef = useRef(null); // Reference for controlling the audio player
 
@@ -59,10 +59,10 @@ const Home = () => {
   const togglePlayPause = () => {
     if (audioRef.current.audioEl.current.paused) {
       audioRef.current.audioEl.current.play();
-      setIsPlaying(true);
+      setIsPlaying(true); // Set to playing
     } else {
       audioRef.current.audioEl.current.pause();
-      setIsPlaying(false);
+      setIsPlaying(false); // Set to paused
     }
   };
 
@@ -148,7 +148,6 @@ const Home = () => {
       {/* Audio Player (Hidden Controls) */}
       <ReactAudioPlayer
         src="https://mbc.thestreamtech.com:7032/"
-        autoPlay
         controls={false}
         ref={audioRef} // Reference to the audio player
       />

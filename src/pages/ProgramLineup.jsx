@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import programData from '../data/program.json'; // Adjust the path as necessary
 
@@ -7,14 +7,40 @@ const ProgramLineup = () => {
     "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
   ];
 
-  const [selectedDay, setSelectedDay] = useState(daysOfWeek[0]); // Default to the first day
+  // Get the current day and time
+  const currentDayIndex = new Date().getDay();
+  const currentTime = new Date().toTimeString().slice(0, 5);
+
+  const [selectedDay, setSelectedDay] = useState(daysOfWeek[currentDayIndex]); // Default to current day
+  const [currentProgram, setCurrentProgram] = useState(null);
 
   const handleDayChange = (event) => {
     setSelectedDay(event.target.value);
   };
 
-  // Get programs for the selected day
-  const programs = programData.programLineup[selectedDay] || [];
+  const getProgramsForDay = (day) => {
+    return programData.programLineup[day] || [];
+  };
+
+  const getCurrentProgram = (programs) => {
+    const now = currentTime;
+    for (let i = 0; i < programs.length; i++) {
+      const [programName, timeRange] = programs[i];
+      const [startTime, endTime] = timeRange.split(' - ').map(time => time.trim());
+
+      if (now >= startTime && now <= endTime) {
+        return programName;
+      }
+    }
+    return "No program running at the moment.";
+  };
+
+  useEffect(() => {
+    const programs = getProgramsForDay(selectedDay);
+    setCurrentProgram(getCurrentProgram(programs));
+  }, [selectedDay, currentTime]);
+
+  const programs = getProgramsForDay(selectedDay);
 
   return (
     <div className="flex flex-col min-h-screen p-4 bg-black">
@@ -51,7 +77,19 @@ const ProgramLineup = () => {
         </motion.select>
       </div>
 
-      <div className="flex-grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-20"> {/* Added margin bottom */}
+      {/* Current Running Program */}
+      <motion.div
+        className="bg-gray-800 rounded-lg p-4 shadow-lg mb-6 text-center"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <p className="text-white">Current Program:</p>
+        <p className="text-green-400 text-lg font-bold">{currentProgram}</p>
+      </motion.div>
+
+      {/* Program List */}
+      <div className="flex-grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-20">
         {programs.length > 0 ? (
           programs.map(([programName, timeRange], index) => (
             <motion.div
@@ -73,7 +111,6 @@ const ProgramLineup = () => {
 
       {/* Bottom Navigation Bar */}
       <div className="fixed bottom-0 left-0 right-0 bg-gray-800 p-4 flex justify-around shadow-lg">
-        {/* Add your navigation items here */}
         <button className="text-white">Home</button>
         <button className="text-white">Programs</button>
         <button className="text-white">Settings</button>

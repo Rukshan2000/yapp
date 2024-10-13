@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaPaperPlane } from "react-icons/fa"; // Icon for the send button
 import { motion } from "framer-motion";
 import { FaFacebook, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa"; // Icons for social media links
+import TopNavBar from '../components/TopNavBar';
 
 const Contact = () => {
   const [message, setMessage] = useState('');
@@ -17,6 +18,10 @@ const Contact = () => {
   };
 
   return (
+
+    <>
+          <TopNavBar />
+         
     <motion.div
       className={`flex flex-col items-center justify-center h-screen p-4 ${
         isDarkMode ? "bg-gradient-to-b from-gray-900 to-gray-800" : "bg-gradient-to-b from-gray-100 to-gray-300"
@@ -88,13 +93,13 @@ const Contact = () => {
       </div>
 
       {/* Social Media Links */}
-      <motion.div className="flex mt-6 space-x-6">
+      <motion.div className="flex mt-6 mb-12 space-x-6"> {/* Add bottom margin here */}
         <motion.a 
           href="https://www.facebook.com/yfm927/" 
           target="_blank" 
           rel="noopener noreferrer" 
           className={`text-3xl ${isDarkMode ? "text-white" : "text-black"}`}
-          whileHover={{ scale: 1.2, rotate: 360 }}
+          whileHover={{ scale: 0.5, rotate: 360 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           <FaFacebook />
@@ -104,7 +109,7 @@ const Contact = () => {
           target="_blank" 
           rel="noopener noreferrer" 
           className={`text-3xl ${isDarkMode ? "text-white" : "text-black"}`}
-          whileHover={{ scale: 1.2, rotate: 360 }}
+          whileHover={{ scale: 0.5, rotate: 360 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           <FaInstagram />
@@ -114,7 +119,7 @@ const Contact = () => {
           target="_blank" 
           rel="noopener noreferrer" 
           className={`text-3xl ${isDarkMode ? "text-white" : "text-black"}`}
-          whileHover={{ scale: 1.2, rotate: 360 }}
+          whileHover={{ scale: 0.5, rotate: 360 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           <FaTiktok />
@@ -124,7 +129,7 @@ const Contact = () => {
           target="_blank" 
           rel="noopener noreferrer" 
           className={`text-3xl ${isDarkMode ? "text-white" : "text-black"}`}
-          whileHover={{ scale: 1.2, rotate: 360 }}
+          whileHover={{ scale: 0.5, rotate: 360 }}
           transition={{ type: "spring", stiffness: 300 }}
         >
           <FaYoutube />
@@ -132,19 +137,9 @@ const Contact = () => {
       </motion.div>
 
       {/* Website Link */}
-      <motion.div className="mt-6">
-        <motion.a 
-          href="https://your-website.com" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className={`text-lg ${isDarkMode ? "text-blue-400" : "text-blue-600"}`}
-          whileHover={{ scale: 1.1 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          Visit Our Website
-        </motion.a>
-      </motion.div>
+
     </motion.div>
+    </>
   );
 };
 

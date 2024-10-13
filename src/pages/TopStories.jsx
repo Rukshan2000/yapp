@@ -1,3 +1,6 @@
+
+
+
 import React, { useState } from 'react';
 import TopNavBar from '../components/TopNavBar';
 import { motion } from 'framer-motion'; // For animation
@@ -32,8 +35,8 @@ const TopStories = () => {
             <iframe
               width="560"
               height="200" // Adjusted height
-              src="https://www.youtube.com/embed/videoseries?si=XziGusqqe2fd8Rj4&list=PLwBEINflt3JHDHA0G4qR6HRNieFyVtCqX"
 
+              src="https://www.youtube.com/embed/videoseries?si=XziGusqqe2fd8Rj4&list=PL0qH7Ay3Z2p7nVuOMvEqd_L027pYH_dZv"
               title="YouTube Playlist 1"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -54,8 +57,8 @@ const TopStories = () => {
             <iframe
               width="560"
               height="200" // Adjusted height
-              src="https://www.youtube.com/embed/videoseries?list=PLwBEINflt3JG7geGUHMn9Qks4odrb34Qc"
 
+              src="https://www.youtube.com/embed/videoseries?list=PL0qH7Ay3Z2p4NYwyEpD2MaeeYj9ee2OJ9"
               title="YouTube Playlist 2"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -76,8 +79,8 @@ const TopStories = () => {
             <iframe
               width="560"
               height="200" // Adjusted height
-              src="https://www.youtube.com/embed/videoseries?list=PLwBEINflt3JG36kGwG_csLKoLe5gqNKtF"
 
+              src="https://www.youtube.com/embed/videoseries?list=PL0qH7Ay3Z2p7_iqJm16457s3VX36r0MeY"
               title="YouTube Playlist 3"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

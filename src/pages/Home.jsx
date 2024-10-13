@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { FaPlay, FaPause, FaSun, FaMoon } from "react-icons/fa"; // Sun and Moon icons for theme toggle
+import { FaPlay, FaPause } from "react-icons/fa"; // Sun and Moon icons for theme toggle
 import { motion } from "framer-motion";
 import ReactAudioPlayer from "react-audio-player";
 import radioImage from "../assets/ylogo.jpg"; // Adjust the path based on your project structure
@@ -9,6 +9,7 @@ const Home = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentProgram, setCurrentProgram] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(true); // Dark mode by default
+  const [isLoading, setIsLoading] = useState(true); // Loading state
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -94,10 +95,39 @@ const Home = () => {
     }
   };
 
+  // Splash screen logic
+  useEffect(() => {
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false); // Set loading to false after 2 seconds
+    }, 2000); // Adjust duration as needed
+
+    return () => clearTimeout(loadingTimer); // Cleanup
+  }, []);
+
   // Waveform animation logic (with reduced heights)
   const bars = Array.from({ length: 20 }, (_, i) => i); // 20 bars
 
   const shareUrl = "https://yfm.lk"; // Update with your share URL
+
+  // Splash screen JSX
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-black">
+        <motion.img
+          src={radioImage}
+          alt="Loading..."
+          className="w-24 h-24 rounded-full" // Circular shape
+          animate={{ scale: [1, 1.1, 1] }} // Pulsing effect
+          transition={{
+            duration: 0.8,
+            ease: "easeInOut",
+            repeat: Infinity,
+          }}
+        />
+        {/* You can add more loading indicators here */}
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -142,12 +172,12 @@ const Home = () => {
         <img
           src={radioImage}
           alt="Radio Station"
-          className="w-full h-full object-cover"
+          className="object-cover w-full h-full"
         />
       </motion.div>
 
       {/* Radio Station Information */}
-      <div className="text-center mb-6">
+      <div className="mb-6 text-center">
         <p className={`text-gray-500 ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
           The Best Hits - 92.7 MHz
         </p>
@@ -157,7 +187,7 @@ const Home = () => {
       </div>
 
       {/* Waveform Visualization */}
-      <div className="w-full max-w-md flex justify-center space-x-1 mb-8">
+      <div className="flex justify-center w-full max-w-md mb-8 space-x-1">
         {bars.map((bar, index) => (
           <motion.div
             key={index}
@@ -177,7 +207,7 @@ const Home = () => {
       </div>
 
       {/* Player Controls */}
-      <div className="flex justify-center items-center space-x-6 mb-8">
+      <div className="flex items-center justify-center mb-8 space-x-6">
         <button
           onClick={togglePlayPause}
           className={`p-5 rounded-full shadow-md hover:scale-110 transition-all duration-300 ease-in-out ${
@@ -185,9 +215,9 @@ const Home = () => {
           }`}
         >
           {isPlaying ? (
-            <FaPause className="text-white text-2xl" />
+            <FaPause className="text-2xl text-white" />
           ) : (
-            <FaPlay className="text-white text-2xl" />
+            <FaPlay className="text-2xl text-white" />
           )}
         </button>
       </div>

@@ -87,7 +87,7 @@ const Contact = () => {
             rel="noopener noreferrer"
             className={`w-full inline-block ${isDarkMode ? "bg-green-600 text-white" : "bg-green-500 text-white"} py-2 rounded-lg shadow-lg text-center transition transform duration-200 hover:scale-105`}
           >
-            Join Fan Our Group
+            Join Our Fan Group
           </a>
         </div>
 

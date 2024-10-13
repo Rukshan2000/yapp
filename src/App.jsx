@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import TopStories from './pages/TopStories';
 import ProgramLineup from './pages/ProgramLineup';
 import NewsFirst from './pages/NewsFirst';
+import Contact from './pages/Contact'; // Import your Contact component
+
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
             <Route path="/top-stories" element={<TopStories />} />
             <Route path="/program-lineup" element={<ProgramLineup />} />
             <Route path="/news-first" element={<NewsFirst />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>

@@ -1,20 +1,20 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaBroadcastTower, FaNewspaper, FaListUl, FaRegNewspaper } from "react-icons/fa";
+import { FaBroadcastTower, FaNewspaper, FaListUl, FaRegNewspaper, FaPhone } from "react-icons/fa"; // Import the phone icon
 
 const BottomNavBar = () => {
   return (
-    <nav className="bg-gray-800 text-white flex justify-around py-3 fixed bottom-0 w-full rounded-t-lg shadow-lg">
+    <nav className="fixed bottom-0 flex justify-around w-full py-3 text-white bg-gray-800 rounded-t-lg shadow-lg">
       <NavLink
         to="/"
         className={({ isActive }) =>
           isActive
-            ? " flex flex-col items-center transform scale-110 transition duration-200"
+            ? "flex flex-col items-center transform scale-110 transition duration-200"
             : "flex flex-col items-center"
         }
       >
         <FaBroadcastTower className="text-2xl" />
-        <span className="text-xs mt-1">Live</span>
+        <span className="mt-1 text-xs">Live</span>
       </NavLink>
       <NavLink
         to="/top-stories"
@@ -25,7 +25,7 @@ const BottomNavBar = () => {
         }
       >
         <FaNewspaper className="text-2xl" />
-        <span className="text-xs mt-1">Top Stories</span>
+        <span className="mt-1 text-xs">Top Stories</span>
       </NavLink>
       <NavLink
         to="/program-lineup"
@@ -36,7 +36,7 @@ const BottomNavBar = () => {
         }
       >
         <FaListUl className="text-2xl" />
-        <span className="text-xs mt-1">Program Lineup</span>
+        <span className="mt-1 text-xs">Program Lineup</span>
       </NavLink>
       <NavLink
         to="/news-first"
@@ -47,7 +47,19 @@ const BottomNavBar = () => {
         }
       >
         <FaRegNewspaper className="text-2xl" />
-        <span className="text-xs mt-1">News First</span>
+        <span className="mt-1 text-xs">News First</span>
+      </NavLink>
+      {/* New Contact NavLink */}
+      <NavLink
+        to="/contact"
+        className={({ isActive }) =>
+          isActive
+            ? "text-yellow-400 flex flex-col items-center transform scale-110 transition duration-200"
+            : "flex flex-col items-center"
+        }
+      >
+        <FaPhone className="text-2xl" /> {/* Phone icon */}
+        <span className="mt-1 text-xs">Contact</span>
       </NavLink>
     </nav>
   );

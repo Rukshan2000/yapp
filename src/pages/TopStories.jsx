@@ -53,7 +53,7 @@ const TopStories = () => {
   return (
     <>
       <TopNavBar />
-      <div className="relative flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-b from-gray-900 to-black">
+      <div className="relative flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-b from-gray-900 to-black" style={{ marginTop: '4rem' }}>
         
         {/* Loading spinner */}
         {isLoading && (

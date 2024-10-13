@@ -6,18 +6,6 @@ const BottomNavBar = () => {
   return (
     <nav className="fixed bottom-0 flex justify-around w-full py-3 text-white bg-gray-700 rounded-t-lg shadow-lg">
 
-      
-      <NavLink
-        to="/top-stories"
-        className={({ isActive }) =>
-          isActive
-            ? "text-yellow-400 flex flex-col items-center transform scale-110 transition duration-200"
-            : "flex flex-col items-center"
-        }
-      >
-        <FaNewspaper className="text-2xl" />
-        <span className="mt-1 text-xs">Stories</span>
-      </NavLink>
 
       <NavLink
         to="/program-lineup"
@@ -31,6 +19,20 @@ const BottomNavBar = () => {
         <span className="mt-1 text-xs">Lineup</span>
       </NavLink>
 
+
+      
+      <NavLink
+        to="/top-stories"
+        className={({ isActive }) =>
+          isActive
+            ? "text-yellow-400 flex flex-col items-center transform scale-110 transition duration-200"
+            : "flex flex-col items-center"
+        }
+      >
+        <FaNewspaper className="text-2xl" />
+        <span className="mt-1 text-xs">Stories</span>
+      </NavLink>
+      
       <NavLink
         to="/"
         className={({ isActive }) =>

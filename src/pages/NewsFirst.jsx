@@ -32,18 +32,16 @@ const NewsFirst = () => {
   };
 
   const playlists = [
-
-
     {
-      src:"https://www.youtube.com/embed/videoseries?si=XziGusqqe2fd8Rj4&list=PLwBEINflt3JHDHA0G4qR6HRNieFyVtCqX",
+      src: "https://www.youtube.com/embed/videoseries?si=XziGusqqe2fd8Rj4&list=PLwBEINflt3JHDHA0G4qR6HRNieFyVtCqX",
       title: "YouTube Playlist 1",
     },
     {
-      src:"https://www.youtube.com/embed/videoseries?list=PLwBEINflt3JG7geGUHMn9Qks4odrb34Qc",
+      src: "https://www.youtube.com/embed/videoseries?list=PLwBEINflt3JG7geGUHMn9Qks4odrb34Qc",
       title: "YouTube Playlist 2",
     },
     {
-      src:"https://www.youtube.com/embed/videoseries?list=PLwBEINflt3JG36kGwG_csLKoLe5gqNKtF",
+      src: "https://www.youtube.com/embed/videoseries?list=PLwBEINflt3JG36kGwG_csLKoLe5gqNKtF",
       title: "YouTube Playlist 3",
     },
   ];
@@ -51,7 +49,8 @@ const NewsFirst = () => {
   return (
     <>
       <TopNavBar />
-      <div className="relative flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-b from-gray-900 to-black">
+      {/* Add margin-top here to push the content down */}
+      <div className="relative flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-b from-gray-900 to-black" style={{ marginTop: '4rem' }}>
         
         {/* Loading spinner */}
         {isLoading && (

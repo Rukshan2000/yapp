@@ -24,7 +24,7 @@ const YouTubeIframe = ({ src, title, delay, onLoad }) => (
   </motion.div>
 );
 
-const TopStories = () => {
+const NewsFirst = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const handleIframeLoad = () => {
@@ -76,4 +76,4 @@ const TopStories = () => {
   );
 };
 
-export default TopStories;
+export default NewsFirst;
